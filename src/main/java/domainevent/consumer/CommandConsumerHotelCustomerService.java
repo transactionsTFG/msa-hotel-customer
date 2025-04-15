@@ -13,17 +13,17 @@ import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import domainevent.command.handler.EventHandler;
+import domainevent.command.handler.CommandPublisher;
 import domainevent.registry.EventHandlerRegistry;
 import msa.commons.consts.JMSQueueNames;
 import msa.commons.event.Event;
 
 @MessageDriven(mappedName = JMSQueueNames.HOTEL_CUSTOMER_QUEUE)
-public class DomainEventConsumerHotelCustomerService implements MessageListener {
+public class CommandConsumerHotelCustomerService implements MessageListener {
 
     private Gson gson;
     private EventHandlerRegistry eventHandlerRegistry;
-    private static final Logger LOGGER = LogManager.getLogger(DomainEventConsumerHotelCustomerService.class);
+    private static final Logger LOGGER = LogManager.getLogger(CommandConsumerHotelCustomerService.class);
 
     @Inject
     public void setGson(Gson gson) {
@@ -42,10 +42,10 @@ public class DomainEventConsumerHotelCustomerService implements MessageListener 
             if (msg instanceof TextMessage m) {
                 Event event = this.gson.fromJson(m.getText(), Event.class);
                 LOGGER.info("Recibido en Cola {}, Evento Id: {}, EventResponse: {}", JMSQueueNames.HOTEL_CUSTOMER_QUEUE,
-                        event.getEventId(), event.getData());
-                EventHandler command = this.eventHandlerRegistry.getHandler(event.getEventId());
+                        event.getEventId(), event.getValue());
+                CommandPublisher command = this.eventHandlerRegistry.getHandler(event.getEventId());
                 if (command != null)
-                    command.handleCommand(event.getData());
+                    command.publishCommand(this.gson.toJson(event.getValue()));
             }
 
         } catch (Exception e) {

@@ -1,2 +1,2 @@
-# msa-customer-hotel
+# msa-hotel-customer
 Microservicio de Clientes de Hotel

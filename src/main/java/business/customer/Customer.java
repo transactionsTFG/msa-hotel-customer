@@ -37,6 +37,8 @@ public class Customer {
     private String dni;
     @Column(nullable = false, name = "is_active")
     private boolean active;
+    @Column(name = "saga_id")
+    private String sagaId;
     @Version
     @Column(name = "version")
     private int version;

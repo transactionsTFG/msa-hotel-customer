@@ -42,4 +42,33 @@ public class CustomerServiceImpl implements CustomerService {
         this.entityManager = entityManager;
     }
 
+    @Override
+    public boolean validateCustomerSagaId(String dni, String sagaId) {
+        List<Customer> listCustomer = this.entityManager.createNamedQuery("customer.findByDNI", Customer.class)
+                                        .setParameter("dni", dni)
+                                        .setLockMode(LockModeType.OPTIMISTIC)
+                                        .getResultList();
+        return !listCustomer.isEmpty() && sagaId.equals(listCustomer.get(0).getSagaId());
+    }
+
+    @Override
+    public boolean remove(long customerId) {
+        Customer c = this.entityManager.find(Customer.class, customerId, LockModeType.OPTIMISTIC);
+        if (c != null) 
+            this.entityManager.remove(c);
+        return c != null;
+    }
+
+    @Override
+    public void commitCreateCustomerByHotelBooking(long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'commitCreateCustomerByHotelBooking'");
+    }
+
+    @Override
+    public void rollbackCreateCustomerByHotelBooking(long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'rollbackCreateCustomerByHotelBooking'");
+    }
+
 }

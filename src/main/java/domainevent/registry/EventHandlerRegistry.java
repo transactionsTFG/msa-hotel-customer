@@ -8,38 +8,38 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import domainevent.command.handler.EventHandler;
+import domainevent.command.handler.CommandPublisher;
 
 import msa.commons.event.EventId;
-import msa.commons.microservices.hotelcustomer.qualifier.CreateCustomerByCreateBookingEventQualifier;
+import msa.commons.microservices.hotelcustomer.qualifier.CreateCustomerByCreateBookingEventCommitQualifier;
 import msa.commons.microservices.hotelcustomer.qualifier.GetCustomerByCreateBookingEventQualifier;
 
 @Singleton
 @Startup
 public class EventHandlerRegistry {
-    private Map<EventId, EventHandler> handlers = new EnumMap<>(EventId.class);
-    private EventHandler createCustomerByHotelBooking;
-    private EventHandler getCustomerByHotelBooking;
+    private Map<EventId, CommandPublisher> handlers = new EnumMap<>(EventId.class);
+    private CommandPublisher createCustomerByHotelBooking;
+    private CommandPublisher getCustomerByHotelBooking;
 
     @PostConstruct
     public void init() {
-        this.handlers.put(EventId.CREATE_CUSTOMER_BY_HOTEL_BOOKING, createCustomerByHotelBooking);
-        this.handlers.put(EventId.GET_CUSTOMER_BY_HOTEL_BOOKING, getCustomerByHotelBooking);
+        this.handlers.put(EventId.BEGIN_CREATE_CUSTOMER_BY_HOTEL_BOOKING, createCustomerByHotelBooking);
+        this.handlers.put(EventId.GET_HOTEL_CUSTOMER, getCustomerByHotelBooking);
     }
 
-    public EventHandler getHandler(EventId eventId) {
+    public CommandPublisher getHandler(EventId eventId) {
         return this.handlers.get(eventId);
     }
 
     @Inject
     public void setCreateCustomerByHotelBooking(
-            @CreateCustomerByCreateBookingEventQualifier EventHandler createCustomerByCreateHotelBooking) {
+            @CreateCustomerByCreateBookingEventCommitQualifier CommandPublisher createCustomerByCreateHotelBooking) {
         this.createCustomerByHotelBooking = createCustomerByCreateHotelBooking;
     }
 
     @Inject
     public void setGetCustomerByHotelBooking(
-            @GetCustomerByCreateBookingEventQualifier EventHandler getCustomerByCreateBooking) {
+            @GetCustomerByCreateBookingEventQualifier CommandPublisher getCustomerByCreateBooking) {
         this.getCustomerByHotelBooking = getCustomerByCreateBooking;
     }
 }

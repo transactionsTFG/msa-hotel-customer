@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 
 import business.customer.Customer;
 import business.customer.CustomerDTO;
-import msa.commons.microservices.hotelcustomer.model.BookingCustomer;
+import msa.commons.microservices.reservationairline.commandevent.model.CustomerInfo;
 
 @Mapper
 public interface CustomerMapper {
@@ -17,6 +17,7 @@ public interface CustomerMapper {
     Customer dtoToEntity(CustomerDTO customerDTO);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "active", ignore = true)
-    CustomerDTO bookingCustomerToDto(BookingCustomer bookingCustomer);
+    @Mapping(target = "sagaId", ignore = true)
+    @Mapping(target = "active", expression = "java(true)")
+    CustomerDTO customerInfoToDto(CustomerInfo customerInfo);
 }
