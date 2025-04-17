@@ -8,6 +8,6 @@ import javax.persistence.PersistenceContext;
 @ApplicationScoped
 public class EntityManagerProducer {
     @Produces
-    @PersistenceContext(unitName="poolCustomer")
+    @PersistenceContext(unitName="poolMSAHotelCustomer")
     private EntityManager entityManager;
 }

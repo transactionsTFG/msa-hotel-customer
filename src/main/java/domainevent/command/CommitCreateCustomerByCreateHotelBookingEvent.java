@@ -10,12 +10,12 @@ import domainevent.command.handler.CommandPublisher;
 import msa.commons.event.EventData;
 import msa.commons.event.EventId;
 import msa.commons.microservices.hotelbooking.commandevent.CreateHotelBookingCommand;
-import msa.commons.microservices.hotelcustomer.qualifier.CreateCustomerByCreateBookingEventCommitQualifier;
+import msa.commons.microservices.hotelcustomer.qualifier.CommitCreateCustomerByCreateHotelBookingEventQualifier;
 
 @Stateless
-@CreateCustomerByCreateBookingEventCommitQualifier
+@CommitCreateCustomerByCreateHotelBookingEventQualifier
 @Local(CommandPublisher.class)
-public class CreateCustomerByCreateBookingEventCommit extends BaseHandler {
+public class CommitCreateCustomerByCreateHotelBookingEvent extends BaseHandler {
 
     @Override
     public void publishCommand(String json) {

@@ -3,21 +3,28 @@ package domainevent.command;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import business.customer.CustomerDTO;
 import domainevent.command.handler.BaseHandler;
 import domainevent.command.handler.CommandPublisher;
 import msa.commons.event.EventData;
 import msa.commons.event.EventId;
 import msa.commons.microservices.hotelbooking.commandevent.CreateHotelBookingCommand;
-import msa.commons.microservices.hotelcustomer.qualifier.GetCustomerByCreateBookingEventQualifier;
+import msa.commons.microservices.hotelcustomer.qualifier.GetCustomerByCreateHotelBookingEventQualifier;
 
 @Stateless
-@GetCustomerByCreateBookingEventQualifier
+@GetCustomerByCreateHotelBookingEventQualifier
 @Local(CommandPublisher.class)
-public class GetCustomerByCreateBookingEvent extends BaseHandler {
+public class GetCustomerByCreateHotelBookingEvent extends BaseHandler {
+        private static final Logger LOGGER = LogManager.getLogger(GetCustomerByCreateHotelBookingEvent.class);
 
     @Override
     public void publishCommand(String json) {
+
+        LOGGER.info("JSON recibido: {}", json);
+        
         EventData eventData = EventData.fromJson(json, CreateHotelBookingCommand.class);
         CreateHotelBookingCommand command = (CreateHotelBookingCommand) eventData.getData();
 
@@ -28,7 +35,7 @@ public class GetCustomerByCreateBookingEvent extends BaseHandler {
 
         command.getCustomerInfo().setIdCustomer(customerId);
         command.getCustomerInfo().setPreviouslyCreated(isPreviouslyCreated);
-        this.jmsEventPublisher.publish(EventId.VALIDATE_HOTEL_CUSTOMER, eventData);
+        this.jmsEventPublisher.publish(EventId.VALIDATE_HOTEL_CUSTOMER_BY_CREATE_HOTEL_BOOKING, eventData);
 
     }
 

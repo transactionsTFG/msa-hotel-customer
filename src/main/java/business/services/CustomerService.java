@@ -8,6 +8,8 @@ public interface CustomerService {
 
     CustomerDTO getCustomerByDNI(String dni);
 
+    CustomerDTO validateCustomer(CustomerDTO customerDTO);
+
     boolean validateCustomerSagaId(String dni, String sagaId);
 
     boolean remove(long customerId);

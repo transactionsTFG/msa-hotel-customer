@@ -8,12 +8,12 @@ import domainevent.command.handler.CommandPublisher;
 import msa.commons.event.EventData;
 import msa.commons.event.EventId;
 import msa.commons.microservices.hotelbooking.commandevent.CreateHotelBookingCommand;
-import msa.commons.microservices.hotelcustomer.qualifier.CreateCustomerByCreateBookingEventRollbackQualifier;
+import msa.commons.microservices.hotelcustomer.qualifier.RollbackCreateCustomerByCreateHotelBookingEventQualifier;
 
 @Stateless
-@CreateCustomerByCreateBookingEventRollbackQualifier
+@RollbackCreateCustomerByCreateHotelBookingEventQualifier
 @Local(CommandPublisher.class)
-public class CreateCustomerByCreateBookingEventRollback extends BaseHandler {
+public class RollbackCreateCustomerByCreateHotelBookingEvent extends BaseHandler {
 
     @Override
     public void publishCommand(String json) {

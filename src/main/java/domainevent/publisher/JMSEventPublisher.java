@@ -35,7 +35,7 @@ public class JMSEventPublisher implements IJMSEventPublisher {
             LOGGER.info("Publicando en Cola {}, Evento Id: {}, Mensaje: {}", JMSQueueNames.AGENCY_ORCHESTATOR_QUEUE, eventId, msg);
             jmsContext.createProducer().send(this.orchestratorQueue, txt);
         } catch (Exception e) {
-            LOGGER.error("Error al publiar el mensaje: {}", e.getMessage());
+            LOGGER.error("Error al publicar el mensaje: {}", e.getMessage());
         }
     }
 
