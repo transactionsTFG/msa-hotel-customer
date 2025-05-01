@@ -8,13 +8,17 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+import business.qualifier.CommitCreateCustomerByCreateHotelBookingEventQualifier;
+import business.qualifier.GetCustomerByCreateHotelBookingEventQualifier;
+import business.qualifier.ValidateHotelCustomerByCreateHotelBookingEventQualifier;
+import business.qualifier.ValidateHotelCustomerByUpdateHotelBookingEventQualifier;
 import domainevent.command.handler.CommandPublisher;
 
 import msa.commons.event.EventId;
-import msa.commons.microservices.hotelcustomer.qualifier.CommitCreateCustomerByCreateHotelBookingEventQualifier;
-import msa.commons.microservices.hotelcustomer.qualifier.GetCustomerByCreateHotelBookingEventQualifier;
-import msa.commons.microservices.hotelcustomer.qualifier.ValidateHotelCustomerByCreateHotelBookingEventQualifier;
-import msa.commons.microservices.hotelcustomer.qualifier.ValidateHotelCustomerByUpdateHotelBookingEventQualifier;
+// import msa.commons.microservices.hotelcustomer.qualifier.CommitCreateCustomerByCreateHotelBookingEventQualifier;
+// import msa.commons.microservices.hotelcustomer.qualifier.GetCustomerByCreateHotelBookingEventQualifier;
+// import msa.commons.microservices.hotelcustomer.qualifier.ValidateHotelCustomerByCreateHotelBookingEventQualifier;
+// import msa.commons.microservices.hotelcustomer.qualifier.ValidateHotelCustomerByUpdateHotelBookingEventQualifier;
 
 @Singleton
 @Startup
