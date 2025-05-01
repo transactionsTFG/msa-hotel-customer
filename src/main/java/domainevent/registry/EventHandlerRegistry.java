@@ -15,10 +15,6 @@ import business.qualifier.ValidateHotelCustomerByUpdateHotelBookingEventQualifie
 import domainevent.command.handler.CommandPublisher;
 
 import msa.commons.event.EventId;
-// import msa.commons.microservices.hotelcustomer.qualifier.CommitCreateCustomerByCreateHotelBookingEventQualifier;
-// import msa.commons.microservices.hotelcustomer.qualifier.GetCustomerByCreateHotelBookingEventQualifier;
-// import msa.commons.microservices.hotelcustomer.qualifier.ValidateHotelCustomerByCreateHotelBookingEventQualifier;
-// import msa.commons.microservices.hotelcustomer.qualifier.ValidateHotelCustomerByUpdateHotelBookingEventQualifier;
 
 @Singleton
 @Startup
