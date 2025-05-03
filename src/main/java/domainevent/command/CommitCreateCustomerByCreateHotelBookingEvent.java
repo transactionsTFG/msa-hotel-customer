@@ -5,12 +5,12 @@ import javax.ejb.Stateless;
 
 import business.customer.CustomerDTO;
 import business.mapper.CustomerMapper;
+import business.qualifier.CommitCreateCustomerByCreateHotelBookingEventQualifier;
 import domainevent.command.handler.BaseHandler;
 import domainevent.command.handler.CommandPublisher;
+import msa.commons.commands.hotelbooking.CreateHotelBookingCommand;
 import msa.commons.event.EventData;
 import msa.commons.event.EventId;
-import msa.commons.microservices.hotelbooking.commandevent.CreateHotelBookingCommand;
-import msa.commons.microservices.hotelcustomer.qualifier.CommitCreateCustomerByCreateHotelBookingEventQualifier;
 
 @Stateless
 @CommitCreateCustomerByCreateHotelBookingEventQualifier

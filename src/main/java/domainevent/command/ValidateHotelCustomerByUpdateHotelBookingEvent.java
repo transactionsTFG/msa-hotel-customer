@@ -7,12 +7,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import business.customer.CustomerDTO;
+import business.qualifier.ValidateHotelCustomerByUpdateHotelBookingEventQualifier;
 import domainevent.command.handler.BaseHandler;
 import domainevent.command.handler.CommandPublisher;
+import msa.commons.commands.hotelbooking.UpdateHotelBookingCommand;
 import msa.commons.event.EventData;
 import msa.commons.event.EventId;
-import msa.commons.microservices.hotelbooking.commandevent.UpdateHotelBookingCommand;
-import msa.commons.microservices.hotelcustomer.qualifier.ValidateHotelCustomerByUpdateHotelBookingEventQualifier;
 
 @Stateless
 @ValidateHotelCustomerByUpdateHotelBookingEventQualifier
